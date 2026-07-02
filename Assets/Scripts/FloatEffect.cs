@@ -1,0 +1,25 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FloatEffect : MonoBehaviour {
+
+	private float startY = 0f;
+	private float duration = 1f;
+	//Rect transform is used for UI components to retain position while scaling Canvas,otherwise, gameobjects use Transform
+	private RectTransform rectTransform;
+
+
+	// Use this for initialization
+	void Start () {
+		rectTransform = GetComponent<RectTransform> ();
+		startY = rectTransform.anchoredPosition.y;
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		//move up and down
+		var newY = startY + (startY + Mathf.Cos (Time.time / duration * 2)) / .1f;
+		rectTransform.anchoredPosition = new Vector2 (rectTransform.anchoredPosition.x, newY);
+	}
+}
